@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688719B3AF270031ABFA /* AppDelegate.swift */; };
-		4C7A688B19B3AF270031ABFA /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688919B3AF270031ABFA /* InterAPPt.xcdatamodeld */; };
 		4C7A688D19B3AF270031ABFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688C19B3AF270031ABFA /* ViewController.swift */; };
 		4C7A689019B3AF270031ABFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A688E19B3AF270031ABFA /* Main.storyboard */; };
 		4C7A689219B3AF270031ABFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A689119B3AF270031ABFA /* Images.xcassets */; };
 		4C7A689E19B3AF270031ABFA /* InterAPPtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A689D19B3AF270031ABFA /* InterAPPtTests.swift */; };
+		4C7A68AA19B3B4EE0031ABFA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */; };
+		4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2319BCBF1B0032E080 /* User.swift */; };
+		4C8D4A2719BCC6B90032E080 /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2519BCC6B90032E080 /* InterAPPt.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +31,16 @@
 		4C7A688219B3AF270031ABFA /* InterAPPt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterAPPt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7A688619B3AF270031ABFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7A688719B3AF270031ABFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C7A688A19B3AF270031ABFA /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
 		4C7A688C19B3AF270031ABFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C7A688F19B3AF270031ABFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C7A689119B3AF270031ABFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4C7A689719B3AF270031ABFA /* InterAPPtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterAPPtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7A689C19B3AF270031ABFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7A689D19B3AF270031ABFA /* InterAPPtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterAPPtTests.swift; sourceTree = "<group>"; };
+		4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		4C7A68AB19B3B6340031ABFA /* InterAPPt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InterAPPt-Bridging-Header.h"; sourceTree = "<group>"; };
+		4C8D4A2319BCBF1B0032E080 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4C8D4A2619BCC6B90032E080 /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7A68AA19B3B4EE0031ABFA /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +65,7 @@
 		4C7A687919B3AF270031ABFA = {
 			isa = PBXGroup;
 			children = (
+				4C8D4A2519BCC6B90032E080 /* InterAPPt.xcdatamodeld */,
 				4C7A688419B3AF270031ABFA /* InterAPPt */,
 				4C7A689A19B3AF270031ABFA /* InterAPPtTests */,
 				4C7A688319B3AF270031ABFA /* Products */,
@@ -77,12 +84,14 @@
 		4C7A688419B3AF270031ABFA /* InterAPPt */ = {
 			isa = PBXGroup;
 			children = (
+				4C8D4A1F19BCBEC10032E080 /* Models */,
+				4C7A68A719B3B4470031ABFA /* Frameworks */,
 				4C7A688719B3AF270031ABFA /* AppDelegate.swift */,
 				4C7A688C19B3AF270031ABFA /* ViewController.swift */,
 				4C7A688E19B3AF270031ABFA /* Main.storyboard */,
 				4C7A689119B3AF270031ABFA /* Images.xcassets */,
-				4C7A688919B3AF270031ABFA /* InterAPPt.xcdatamodeld */,
 				4C7A688519B3AF270031ABFA /* Supporting Files */,
+				4C7A68AB19B3B6340031ABFA /* InterAPPt-Bridging-Header.h */,
 			);
 			path = InterAPPt;
 			sourceTree = "<group>";
@@ -110,6 +119,22 @@
 				4C7A689C19B3AF270031ABFA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C7A68A719B3B4470031ABFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C8D4A1F19BCBEC10032E080 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4C8D4A2319BCBF1B0032E080 /* User.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +186,7 @@
 				TargetAttributes = {
 					4C7A688119B3AF270031ABFA = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = ZH7Q4VCUAY;
 					};
 					4C7A689619B3AF270031ABFA = {
 						CreatedOnToolsVersion = 6.0;
@@ -211,9 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */,
+				4C8D4A2719BCC6B90032E080 /* InterAPPt.xcdatamodeld in Sources */,
 				4C7A688D19B3AF270031ABFA /* ViewController.swift in Sources */,
 				4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */,
-				4C7A688B19B3AF270031ABFA /* InterAPPt.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,9 +356,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InterAPPt",
+				);
 				INFOPLIST_FILE = InterAPPt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "InterAPPt/InterAPPt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -340,9 +375,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InterAPPt",
+				);
 				INFOPLIST_FILE = InterAPPt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "InterAPPt/InterAPPt-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -399,6 +441,7 @@
 				4C7A68A319B3AF270031ABFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C7A68A419B3AF270031ABFA /* Build configuration list for PBXNativeTarget "InterAPPtTests" */ = {
 			isa = XCConfigurationList;
@@ -407,16 +450,17 @@
 				4C7A68A619B3AF270031ABFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4C7A688919B3AF270031ABFA /* InterAPPt.xcdatamodeld */ = {
+		4C8D4A2519BCC6B90032E080 /* InterAPPt.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4C7A688A19B3AF270031ABFA /* InterAPPt.xcdatamodel */,
+				4C8D4A2619BCC6B90032E080 /* InterAPPt.xcdatamodel */,
 			);
-			currentVersion = 4C7A688A19B3AF270031ABFA /* InterAPPt.xcdatamodel */;
+			currentVersion = 4C8D4A2619BCC6B90032E080 /* InterAPPt.xcdatamodel */;
 			path = InterAPPt.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
