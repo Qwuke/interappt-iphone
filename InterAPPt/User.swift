@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-class User: NSManagedObject {
+class User: BaseModel {
 
-    @NSManaged var uuid: String
+    @NSManaged var id: String
     @NSManaged var name: String
     @NSManaged var email: String
     @NSManaged var gender: String
@@ -29,17 +29,14 @@ class User: NSManagedObject {
         
         let fetchedObjects = managedObjectContext?.executeFetchRequest(fetchRequest, error: error)
         
-        
         if fetchedObjects?.count == 0 {
-            print("Could not find user")
             return nil
         } else {
-            print("Found user")
             return fetchedObjects?[0] as? User
         }
     }
     
-    class func createFromFacebookInfo(fbUser: FBGraphUser) -> User {
+    class func createFromFacebookInfo(fbUser: FBGraphUser) -> User? {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
         let user = User(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
@@ -48,8 +45,7 @@ class User: NSManagedObject {
         user.email = fbUser.objectForKey("email") as String
         user.gender = fbUser.objectForKey("gender") as String
         user.locale = fbUser.objectForKey("locale") as String
-        user.timezone = fbUser.objectForKey("timezone") as String
-        managedObjectContext?.save(nil)
+        user.save()
         return user
     }
 }

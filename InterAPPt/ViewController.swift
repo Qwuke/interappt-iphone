@@ -13,10 +13,12 @@ class ViewController: UIViewController, FBLoginViewDelegate {
     var interAPPtLogoView: UILabel!
     var facebookLoginView: FBLoginView!
     var currentUser: User!
+    var savingFacebookUser: Bool!;
                             
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        savingFacebookUser = false
         
         addFacebookButton()
         addInterAPPtLogo()
@@ -47,9 +49,14 @@ class ViewController: UIViewController, FBLoginViewDelegate {
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        self.currentUser = User.current()
-        if self.currentUser == nil {
-            self.currentUser = User.createFromFacebookInfo(user)
+        if !savingFacebookUser {
+            savingFacebookUser = true
+            self.currentUser = User.current()
+            if self.currentUser == nil {
+                self.currentUser = User.createFromFacebookInfo(user)
+            }
+
+            println("Found user with id: \(self.currentUser.getAttributes())")
         }
     }
     

@@ -14,7 +14,8 @@
 		4C7A689E19B3AF270031ABFA /* InterAPPtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A689D19B3AF270031ABFA /* InterAPPtTests.swift */; };
 		4C7A68AA19B3B4EE0031ABFA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */; };
 		4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2319BCBF1B0032E080 /* User.swift */; };
-		4C8D4A2719BCC6B90032E080 /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2519BCC6B90032E080 /* InterAPPt.xcdatamodeld */; };
+		4C8D4A2919BD3E4B0032E080 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */; };
+		4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C93C59019BD5C380049A0C5 /* InterAPPt.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +41,8 @@
 		4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		4C7A68AB19B3B6340031ABFA /* InterAPPt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InterAPPt-Bridging-Header.h"; sourceTree = "<group>"; };
 		4C8D4A2319BCBF1B0032E080 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		4C8D4A2619BCC6B90032E080 /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
+		4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		4C93C59119BD5C380049A0C5 /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,7 @@
 		4C7A687919B3AF270031ABFA = {
 			isa = PBXGroup;
 			children = (
-				4C8D4A2519BCC6B90032E080 /* InterAPPt.xcdatamodeld */,
+				4C93C59019BD5C380049A0C5 /* InterAPPt.xcdatamodeld */,
 				4C7A688419B3AF270031ABFA /* InterAPPt */,
 				4C7A689A19B3AF270031ABFA /* InterAPPtTests */,
 				4C7A688319B3AF270031ABFA /* Products */,
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				4C8D4A2319BCBF1B0032E080 /* User.swift */,
+				4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -237,10 +240,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */,
 				4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */,
-				4C8D4A2719BCC6B90032E080 /* InterAPPt.xcdatamodeld in Sources */,
 				4C7A688D19B3AF270031ABFA /* ViewController.swift in Sources */,
 				4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */,
+				4C8D4A2919BD3E4B0032E080 /* BaseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,12 +459,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4C8D4A2519BCC6B90032E080 /* InterAPPt.xcdatamodeld */ = {
+		4C93C59019BD5C380049A0C5 /* InterAPPt.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4C8D4A2619BCC6B90032E080 /* InterAPPt.xcdatamodel */,
+				4C93C59119BD5C380049A0C5 /* InterAPPt.xcdatamodel */,
 			);
-			currentVersion = 4C8D4A2619BCC6B90032E080 /* InterAPPt.xcdatamodel */;
+			currentVersion = 4C93C59119BD5C380049A0C5 /* InterAPPt.xcdatamodel */;
 			path = InterAPPt.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

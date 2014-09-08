@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if FBSession.activeSession().state == FBSessionState.CreatedTokenLoaded {
             FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_friends"], allowLoginUI: false, completionHandler: {session, state, error in
-                    print("completion handler: session \(session), state \(state), error \(error)")
+//                    println("completion handler: session \(session), state \(state), error \(error)")
                 })
         } else {
-            print("Facebook session not created")
+            println("Facebook session not created")
         }
         
         return true
@@ -58,13 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        print("Facebook URL \(url)")
+        println("Facebook URL \(url)")
         return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
         var wasHandled: Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
-        print("Facebook URL \(url) for \(sourceApplication) was handled: \(wasHandled)")
+        println("Facebook URL \(url) for \(sourceApplication) was handled: \(wasHandled)")
         return wasHandled
     }
 
