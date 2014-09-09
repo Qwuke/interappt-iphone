@@ -31,6 +31,12 @@ class BaseModel: NSManagedObject {
         return dataString
     }
     
+    func getAccessToken() -> String {
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        return dict.objectForKey("InterAPPt Access Token") as String
+    }
+    
     func getURL() -> NSURL {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
@@ -50,6 +56,8 @@ class BaseModel: NSManagedObject {
         
         NSURLProtocol.setProperty(requestBodyData?.length, forKey: "Content-Length", inRequest: request)
         NSURLProtocol.setProperty("application/x-www-form-urlencoded", forKey: "Content-Type", inRequest: request)
+        
+        request.addValue(getAccessToken(), forHTTPHeaderField: "TOKEN")
         
         let reply = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&error)
         let jsonResult: Dictionary = NSJSONSerialization.JSONObjectWithData(reply!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
