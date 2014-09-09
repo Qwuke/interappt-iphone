@@ -21,32 +21,28 @@ class BaseModel: NSManagedObject {
         var dataString = ""
         
         for (name, attribute) in entity.attributesByName  {
-            dataString += "\(self.className().lowercaseString)[\(name)]=\(self.valueForKey(name as String))&"
+            dataString += "\(self.classForCoder.className().lowercaseString)[\(name)]=\(self.valueForKey(name as String))&"
         }
         
+        let stringLength = countElements(dataString)
+        let substringIndex = stringLength - 1
+        dataString.substringToIndex(advance(dataString.startIndex, substringIndex))
+
         return dataString
-    }
-    
-    func className() -> String {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        let bundleName = dict.objectForKey("CFBundleName") as String
-        var _className = NSStringFromClass(self.classForCoder)
-        return _className.componentsSeparatedByString("\(bundleName).")[1] as String
     }
     
     func getURL() -> NSURL {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
         let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
-        return NSURL(string: urlAsString + "/\(self.className().lowercaseString)s")
+        return NSURL(string: urlAsString + "/\(self.classForCoder.className().lowercaseString)s")
     }
     
     func saveToApi() {
         var error: NSError? = nil
         var response: NSURLResponse? = nil
         let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        var request = NSMutableURLRequest(URL: getURL(), cachePolicy: cachePolicy, timeoutInterval: 2.0)
+        let request = NSMutableURLRequest(URL: getURL(), cachePolicy: cachePolicy, timeoutInterval: 2.0)
         let requestBodyData = (self.toDataString() as NSString).dataUsingEncoding(NSUTF8StringEncoding)
         
         request.HTTPBody = requestBodyData
@@ -56,7 +52,7 @@ class BaseModel: NSManagedObject {
         NSURLProtocol.setProperty("application/x-www-form-urlencoded", forKey: "Content-Type", inRequest: request)
         
         let reply = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&error)
-        var jsonResult: Dictionary = NSJSONSerialization.JSONObjectWithData(reply!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        let jsonResult: Dictionary = NSJSONSerialization.JSONObjectWithData(reply!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
         
         for (name, value) in jsonResult {
             self.setValue(value, forKeyPath: name as String)
@@ -66,24 +62,19 @@ class BaseModel: NSManagedObject {
     func getAttributes() -> Dictionary<String, AnyObject?> {
         var dict: Dictionary<String, AnyObject?> = [:]
         for (name, attribute) in entity.attributesByName {
-            var _name: String = name as String
-            var _value: AnyObject? = self.valueForKeyPath(_name)
+            let _name: String = name as String
+            let _value: AnyObject? = self.valueForKeyPath(_name)
             dict[_name] = _value
         }
         
         return dict
-    }
-
-    
-    func saveManagedObjectContext() {
-        
     }
     
     class func className() -> String {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
         let bundleName = dict.objectForKey("CFBundleName") as String
-        var _className = NSStringFromClass(self)
+        let _className = NSStringFromClass(self)
         return _className.componentsSeparatedByString("\(bundleName).")[1] as String
     }
     
