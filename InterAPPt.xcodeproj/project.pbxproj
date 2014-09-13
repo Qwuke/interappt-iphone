@@ -16,6 +16,9 @@
 		4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2319BCBF1B0032E080 /* User.swift */; };
 		4C8D4A2919BD3E4B0032E080 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */; };
 		4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C93C59019BD5C380049A0C5 /* InterAPPt.xcdatamodeld */; };
+		4CDDCBAB19C4B82900709663 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAA19C4B82900709663 /* logo.png */; };
+		4CDDCBAE19C4BC6600709663 /* Mohave.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAC19C4BB7400709663 /* Mohave.otf */; };
+		4CDDCBAF19C4BC6900709663 /* Mohave-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAD19C4BB7E00709663 /* Mohave-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,9 @@
 		4C8D4A2319BCBF1B0032E080 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		4C93C59119BD5C380049A0C5 /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
+		4CDDCBAA19C4B82900709663 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		4CDDCBAC19C4BB7400709663 /* Mohave.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mohave.otf; sourceTree = "<group>"; };
+		4CDDCBAD19C4BB7E00709663 /* Mohave-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mohave-Bold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,9 @@
 		4C7A688519B3AF270031ABFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CDDCBAD19C4BB7E00709663 /* Mohave-Bold.otf */,
+				4CDDCBAC19C4BB7400709663 /* Mohave.otf */,
+				4CDDCBAA19C4B82900709663 /* logo.png */,
 				4C7A688619B3AF270031ABFA /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -221,8 +230,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CDDCBAF19C4BC6900709663 /* Mohave-Bold.otf in Resources */,
 				4C7A689019B3AF270031ABFA /* Main.storyboard in Resources */,
+				4CDDCBAE19C4BC6600709663 /* Mohave.otf in Resources */,
 				4C7A689219B3AF270031ABFA /* Images.xcassets in Resources */,
+				4CDDCBAB19C4B82900709663 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
