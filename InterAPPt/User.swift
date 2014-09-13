@@ -29,6 +29,8 @@ class User: BaseModel {
         
         let fetchedObjects = managedObjectContext?.executeFetchRequest(fetchRequest, error: error)
         
+        println(fetchedObjects)
+        
         if fetchedObjects?.count == 0 {
             return nil
         } else {
@@ -36,7 +38,7 @@ class User: BaseModel {
         }
     }
     
-    class func createFromFacebookInfo(fbUser: FBGraphUser) -> User? {
+    class func createFromFacebookInfo(fbUser: FBGraphUser, completion: (user: User) -> Void) {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
         let user = User(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
@@ -45,7 +47,9 @@ class User: BaseModel {
         user.email = fbUser.objectForKey("email") as String
         user.gender = fbUser.objectForKey("gender") as String
         user.locale = fbUser.objectForKey("locale") as String
-        user.save()
-        return user
+        user.save({(User) -> Void in
+            managedObjectContext?.save(nil)
+            completion(user: user)
+        })
     }
 }
