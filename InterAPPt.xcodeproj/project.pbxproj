@@ -8,13 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688719B3AF270031ABFA /* AppDelegate.swift */; };
-		4C7A688D19B3AF270031ABFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688C19B3AF270031ABFA /* ViewController.swift */; };
+		4C7A688D19B3AF270031ABFA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688C19B3AF270031ABFA /* LoginController.swift */; };
 		4C7A689019B3AF270031ABFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A688E19B3AF270031ABFA /* Main.storyboard */; };
 		4C7A689219B3AF270031ABFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A689119B3AF270031ABFA /* Images.xcassets */; };
 		4C7A689E19B3AF270031ABFA /* InterAPPtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A689D19B3AF270031ABFA /* InterAPPtTests.swift */; };
 		4C7A68AA19B3B4EE0031ABFA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */; };
 		4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2319BCBF1B0032E080 /* User.swift */; };
 		4C8D4A2919BD3E4B0032E080 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */; };
+		4C90443A19C7DC6700689264 /* Interappt BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C90443919C7DC6700689264 /* Interappt BG.jpg */; };
+		4C90444219C7E57C00689264 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C90443F19C7E57C00689264 /* FBShimmeringLayer.m */; };
+		4C90444319C7E57C00689264 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C90444119C7E57C00689264 /* FBShimmeringView.m */; };
+		4C90444519CF3DA000689264 /* Interappt BG2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C90444419CF3DA000689264 /* Interappt BG2.jpg */; };
+		4C90444719CF6CCE00689264 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C90444619CF6CCE00689264 /* MainController.swift */; };
+		4C90444A19CF718B00689264 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C90444919CF718B00689264 /* ContainerController.swift */; };
+		4C90444D19CF784D00689264 /* LoginToMainControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C90444C19CF784D00689264 /* LoginToMainControllerTransition.swift */; };
 		4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C93C59019BD5C380049A0C5 /* InterAPPt.xcdatamodeld */; };
 		4CDDCBAB19C4B82900709663 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAA19C4B82900709663 /* logo.png */; };
 		4CDDCBAE19C4BC6600709663 /* Mohave.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAC19C4BB7400709663 /* Mohave.otf */; };
@@ -35,7 +42,7 @@
 		4C7A688219B3AF270031ABFA /* InterAPPt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterAPPt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7A688619B3AF270031ABFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7A688719B3AF270031ABFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C7A688C19B3AF270031ABFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C7A688C19B3AF270031ABFA /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4C7A688F19B3AF270031ABFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C7A689119B3AF270031ABFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4C7A689719B3AF270031ABFA /* InterAPPtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterAPPtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +52,17 @@
 		4C7A68AB19B3B6340031ABFA /* InterAPPt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InterAPPt-Bridging-Header.h"; sourceTree = "<group>"; };
 		4C8D4A2319BCBF1B0032E080 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		4C90443919C7DC6700689264 /* Interappt BG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Interappt BG.jpg"; sourceTree = "<group>"; };
+		4C90443C19C7E57C00689264 /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
+		4C90443D19C7E57C00689264 /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
+		4C90443E19C7E57C00689264 /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
+		4C90443F19C7E57C00689264 /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
+		4C90444019C7E57C00689264 /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
+		4C90444119C7E57C00689264 /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
+		4C90444419CF3DA000689264 /* Interappt BG2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Interappt BG2.jpg"; sourceTree = "<group>"; };
+		4C90444619CF6CCE00689264 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		4C90444919CF718B00689264 /* ContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
+		4C90444C19CF784D00689264 /* LoginToMainControllerTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginToMainControllerTransition.swift; sourceTree = "<group>"; };
 		4C93C59119BD5C380049A0C5 /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
 		4CDDCBAA19C4B82900709663 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4CDDCBAC19C4BB7400709663 /* Mohave.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mohave.otf; sourceTree = "<group>"; };
@@ -92,10 +110,11 @@
 		4C7A688419B3AF270031ABFA /* InterAPPt */ = {
 			isa = PBXGroup;
 			children = (
+				4C90444B19CF783100689264 /* Transitions */,
+				4C90444819CF6DDF00689264 /* Controllers */,
 				4C8D4A1F19BCBEC10032E080 /* Models */,
 				4C7A68A719B3B4470031ABFA /* Frameworks */,
 				4C7A688719B3AF270031ABFA /* AppDelegate.swift */,
-				4C7A688C19B3AF270031ABFA /* ViewController.swift */,
 				4C7A688E19B3AF270031ABFA /* Main.storyboard */,
 				4C7A689119B3AF270031ABFA /* Images.xcassets */,
 				4C7A688519B3AF270031ABFA /* Supporting Files */,
@@ -107,6 +126,8 @@
 		4C7A688519B3AF270031ABFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4C90444419CF3DA000689264 /* Interappt BG2.jpg */,
+				4C90443919C7DC6700689264 /* Interappt BG.jpg */,
 				4CDDCBAD19C4BB7E00709663 /* Mohave-Bold.otf */,
 				4CDDCBAC19C4BB7400709663 /* Mohave.otf */,
 				4CDDCBAA19C4B82900709663 /* logo.png */,
@@ -135,6 +156,7 @@
 		4C7A68A719B3B4470031ABFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C90443B19C7E57C00689264 /* FBShimmering */,
 				4C7A68A919B3B4EE0031ABFA /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
@@ -147,6 +169,38 @@
 				4C8D4A2819BD3E4B0032E080 /* BaseModel.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		4C90443B19C7E57C00689264 /* FBShimmering */ = {
+			isa = PBXGroup;
+			children = (
+				4C90443C19C7E57C00689264 /* FBShimmering-Prefix.pch */,
+				4C90443D19C7E57C00689264 /* FBShimmering.h */,
+				4C90443E19C7E57C00689264 /* FBShimmeringLayer.h */,
+				4C90443F19C7E57C00689264 /* FBShimmeringLayer.m */,
+				4C90444019C7E57C00689264 /* FBShimmeringView.h */,
+				4C90444119C7E57C00689264 /* FBShimmeringView.m */,
+			);
+			name = FBShimmering;
+			path = "FBShimmering copy";
+			sourceTree = "<group>";
+		};
+		4C90444819CF6DDF00689264 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C7A688C19B3AF270031ABFA /* LoginController.swift */,
+				4C90444619CF6CCE00689264 /* MainController.swift */,
+				4C90444919CF718B00689264 /* ContainerController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4C90444B19CF783100689264 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				4C90444C19CF784D00689264 /* LoginToMainControllerTransition.swift */,
+			);
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,9 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CDDCBAF19C4BC6900709663 /* Mohave-Bold.otf in Resources */,
+				4C90443A19C7DC6700689264 /* Interappt BG.jpg in Resources */,
 				4C7A689019B3AF270031ABFA /* Main.storyboard in Resources */,
 				4CDDCBAE19C4BC6600709663 /* Mohave.otf in Resources */,
 				4C7A689219B3AF270031ABFA /* Images.xcassets in Resources */,
+				4C90444519CF3DA000689264 /* Interappt BG2.jpg in Resources */,
 				4CDDCBAB19C4B82900709663 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,11 +308,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C90444719CF6CCE00689264 /* MainController.swift in Sources */,
+				4C90444219C7E57C00689264 /* FBShimmeringLayer.m in Sources */,
 				4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */,
 				4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */,
-				4C7A688D19B3AF270031ABFA /* ViewController.swift in Sources */,
+				4C90444319C7E57C00689264 /* FBShimmeringView.m in Sources */,
+				4C7A688D19B3AF270031ABFA /* LoginController.swift in Sources */,
 				4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */,
 				4C8D4A2919BD3E4B0032E080 /* BaseModel.swift in Sources */,
+				4C90444D19CF784D00689264 /* LoginToMainControllerTransition.swift in Sources */,
+				4C90444A19CF718B00689264 /* ContainerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

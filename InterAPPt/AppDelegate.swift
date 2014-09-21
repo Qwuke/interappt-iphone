@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        print(NSBundle.mainBundle().bundleIdentifier)
+//        print(NSBundle.mainBundle().bundleIdentifier)
         FBLoginView.self
         
         if FBSession.activeSession().state == FBSessionState.CreatedTokenLoaded {
@@ -58,13 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        println("Facebook URL \(url)")
+//        println("Facebook URL \(url)")
         return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
         var wasHandled: Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
-        println("Facebook URL \(url) for \(sourceApplication) was handled: \(wasHandled)")
+//        println("Facebook URL \(url) for \(sourceApplication) was handled: \(wasHandled)")
         return wasHandled
     }
 
