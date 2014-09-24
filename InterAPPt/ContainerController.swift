@@ -28,7 +28,8 @@ class ContainerController: UIViewController {
     
     func showMainController() {
         self.presentViewController(mainController, animated: true) { () -> Void in
-            
+            self.loginController.view.removeFromSuperview()
+            self.view.addSubview(self.mainController.view)
         }
     }
 }

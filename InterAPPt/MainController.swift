@@ -8,6 +8,14 @@
 
 import UIKit
 
-class MainController: UIViewController {
+class MainController: UINavigationController {    
+    override func viewDidLoad() {
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationBar.barTintColor = UIColor.blackColor()
+    }
     
+    override func viewDidAppear(animated: Bool) {
+        var locationSearchController = LocationSearchController();
+        self.pushViewController(locationSearchController, animated: false)
+    }
 }

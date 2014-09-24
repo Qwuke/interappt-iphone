@@ -209,13 +209,6 @@ class LoginController: UIViewController, FBLoginViewDelegate {
         })
     }
     
-//    func transitionToMainController() {
-//        mainController = MainController()
-//        self.parentViewController.presentViewController(mainController, animated: true) { () -> Void in
-//            
-//        }
-//    }
-    
     func addProfileImage() {
         self.profileImage = UIImageView(image: self.currentUser.profileImage())
         self.profileImage.frame = CGRectMake(self.view.center.x - 40, self.view.frame.size.height - 200, 80, 80)

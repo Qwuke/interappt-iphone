@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "InterAPPt.LoginToMainControllerTransitionDelegate.animationControllerForPresentedController (InterAPPt.LoginToMainControllerTransitionDelegate)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIViewController&gt;, presentingController : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIViewController&gt;, sourceController : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIViewController&gt;) -&gt; Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIViewControllerAnimatedTransitioning&gt;:LoginToMainControllerTransition.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "source">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "InterAPPt.ViewController.loginViewFetchedUserInfo (InterAPPt.ViewController)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.FBLoginView&gt;, user : ObjectiveC.FBGraphUser) -&gt; ():ViewController.swift">
       </ContextState>
       <ContextState

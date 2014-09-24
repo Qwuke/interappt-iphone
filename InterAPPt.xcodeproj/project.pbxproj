@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C738B3219D255FC00C1D8DA /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C738B3119D255FC00C1D8DA /* LocationSearchController.swift */; };
 		4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688719B3AF270031ABFA /* AppDelegate.swift */; };
 		4C7A688D19B3AF270031ABFA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A688C19B3AF270031ABFA /* LoginController.swift */; };
 		4C7A689019B3AF270031ABFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A688E19B3AF270031ABFA /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C738B3119D255FC00C1D8DA /* LocationSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		4C7A688219B3AF270031ABFA /* InterAPPt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterAPPt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7A688619B3AF270031ABFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7A688719B3AF270031ABFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				4C7A688C19B3AF270031ABFA /* LoginController.swift */,
 				4C90444619CF6CCE00689264 /* MainController.swift */,
 				4C90444919CF718B00689264 /* ContainerController.swift */,
+				4C738B3119D255FC00C1D8DA /* LocationSearchController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */,
 				4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */,
 				4C90444319C7E57C00689264 /* FBShimmeringView.m in Sources */,
+				4C738B3219D255FC00C1D8DA /* LocationSearchController.swift in Sources */,
 				4C7A688D19B3AF270031ABFA /* LoginController.swift in Sources */,
 				4C7A688819B3AF270031ABFA /* AppDelegate.swift in Sources */,
 				4C8D4A2919BD3E4B0032E080 /* BaseModel.swift in Sources */,
