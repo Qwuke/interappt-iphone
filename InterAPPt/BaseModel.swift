@@ -12,13 +12,96 @@ import Foundation
 import CoreData
 
 class BaseModel: NSManagedObject {
-    var mContext: NSManagedObjectContext!
     
-    func managedObjectContext() -> NSManagedObjectContext {
-        if (mContext == nil) {
-            mContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    required override init(entity: NSEntityDescription,
+        insertIntoManagedObjectContext context: NSManagedObjectContext!) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+
+    class func managedObjectContext() -> NSManagedObjectContext {
+      return (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    }
+    
+    class func className() -> String {
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        let bundleName = dict.objectForKey("CFBundleName") as String
+        let _className = NSStringFromClass(self)
+        return _className.componentsSeparatedByString("\(bundleName).")[1] as String
+    }
+    
+    class func getAccessToken() -> String {
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        return dict.objectForKey("InterAPPt Access Token") as String
+    }
+    
+    class func getURL() -> NSURL {
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
+        return NSURL(string: urlAsString + "/\(self.className().lowercaseString)s")
+    }
+    
+    class func getURL(baseModelId: String) -> NSURL {
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
+        return NSURL(string: urlAsString + "/\(self.className().lowercaseString)s/\(baseModelId)")
+    }
+    
+    class func createRequest(method: String, url: NSURL) -> NSMutableURLRequest {
+        let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        println("URL: \(url)")
+        
+        let request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: 2.0)
+        request.HTTPMethod = method
+        NSURLProtocol.setProperty("application/x-www-form-urlencoded", forKey: "Content-Type", inRequest: request)
+        request.addValue(getAccessToken(), forHTTPHeaderField: "TOKEN")
+        
+        return request
+    }
+    
+    class func sendRequest(request: NSURLRequest, completion: (response:NSURLResponse!, responseData:NSData!, error:NSError!) -> ()) {
+        var error: NSError? = nil
+        var response: NSURLResponse? = nil
+        var queue: NSOperationQueue = NSOperationQueue()
+        // Sending Asynchronous request using NSURLConnection
+        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+            completion(response: response, responseData: responseData, error: error)
+        })
+    }
+    
+    class func retrieveFromApi(completion: (NSArray) -> ()) {
+        var request = createRequest("GET", url: self.getURL())
+        
+        sendRequest(request, completion:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+            
+            let jsonResult: Array = NSJSONSerialization.JSONObjectWithData(responseData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
+            
+            var instances: [BaseModel] = []
+            for attributes in jsonResult {
+                let modelAttributes = attributes as? Dictionary<String, AnyObject>
+                var instance = self.build(modelAttributes!)
+                instances.append(instance)
+            }
+            
+            completion(instances)
+        })
+    }
+    
+    class func build(attributes: Dictionary<String, AnyObject?>) -> BaseModel {
+        let managedObjectContext = self.managedObjectContext()
+        let entity = NSEntityDescription.entityForName(self.className(), inManagedObjectContext: managedObjectContext)
+        let instance = self(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+        
+        for (name, value) in attributes {
+            if instance.respondsToSelector(Selector(name as String)) {
+                instance.setValue(value, forKeyPath: name as String)
+            }
         }
-        return mContext
+        
+        return instance
     }
     
     func save(completion: (BaseModel) -> ()) {
@@ -27,8 +110,8 @@ class BaseModel: NSManagedObject {
     
     func destroy(completion: () -> ()) {
         deleteFromApi({ (BaseModel) -> () in
-            self.managedObjectContext().deleteObject(self)
-            self.managedObjectContext().save(nil)
+            self.classForCoder.managedObjectContext().deleteObject(self)
+            self.classForCoder.managedObjectContext().save(nil)
             completion()
         })
     }
@@ -43,38 +126,18 @@ class BaseModel: NSManagedObject {
         let stringLength = countElements(dataString)
         let substringIndex = stringLength - 1
         dataString.substringToIndex(advance(dataString.startIndex, substringIndex))
-
+        
         return dataString
-    }
-    
-    func getAccessToken() -> String {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        return dict.objectForKey("InterAPPt Access Token") as String
-    }
-    
-    func getURL() -> NSURL {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
-        return NSURL(string: urlAsString + "/\(self.classForCoder.className().lowercaseString)s")
-    }
-    
-    func getURL(baseModelId: String) -> NSURL {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
-        return NSURL(string: urlAsString + "/\(self.classForCoder.className().lowercaseString)s/\(baseModelId)")
     }
     
     func saveToApi(completion: (BaseModel) -> ()) {
         let requestBodyData = (self.toDataString() as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        var request = createRequest("POST")
+        var request = self.classForCoder.createRequest("POST", url: self.classForCoder.getURL(self.valueForKey("id") as String))
         request.HTTPBody = requestBodyData
         NSURLProtocol.setProperty(requestBodyData?.length, forKey: "Content-Length", inRequest: request)
         
         // Sending Asynchronous request using NSURLConnection
-        sendRequest(request, completion:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+        self.classForCoder.sendRequest(request, completion:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
             
             let jsonResult: Dictionary = NSJSONSerialization.JSONObjectWithData(responseData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
             
@@ -89,34 +152,11 @@ class BaseModel: NSManagedObject {
         })
     }
     
-    func createRequest(method: String) -> NSMutableURLRequest {
-        let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        var url = self.valueForKey("id") == nil ? self.getURL() : self.getURL(self.valueForKey("id") as String)
-        println("URL: \(url)")
-        
-        let request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: 2.0)
-        request.HTTPMethod = method
-        NSURLProtocol.setProperty("application/x-www-form-urlencoded", forKey: "Content-Type", inRequest: request)
-        request.addValue(getAccessToken(), forHTTPHeaderField: "TOKEN")
-        
-        return request
-    }
-    
-    func sendRequest(request: NSURLRequest, completion: (response:NSURLResponse!, responseData:NSData!, error:NSError!) -> ()) {
-        var error: NSError? = nil
-        var response: NSURLResponse? = nil
-        var queue: NSOperationQueue = NSOperationQueue()
-        // Sending Asynchronous request using NSURLConnection
-        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
-            completion(response: response, responseData: responseData, error: error)
-        })
-    }
-    
     func deleteFromApi(completion: (BaseModel) -> ()) {
-        let request = createRequest("DELETE")
+        let request = self.classForCoder.createRequest("DELETE", url: self.classForCoder.getURL(self.valueForKey("id") as String))
         
         // Sending Asynchronous request using NSURLConnection
-        sendRequest(request, completion: {(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+        self.classForCoder.sendRequest(request, completion: {(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
             completion(self)
         })
     }
@@ -131,13 +171,4 @@ class BaseModel: NSManagedObject {
         
         return dict
     }
-    
-    class func className() -> String {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        let bundleName = dict.objectForKey("CFBundleName") as String
-        let _className = NSStringFromClass(self)
-        return _className.componentsSeparatedByString("\(bundleName).")[1] as String
-    }
-    
 }

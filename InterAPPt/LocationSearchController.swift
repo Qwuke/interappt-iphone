@@ -49,6 +49,10 @@ class LocationSearchController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar!) {
-        
+        Location.retrieveFromApi() { (locations) -> () in
+            for location in locations as [Location] {
+                println(location.logoImage())
+            }
+        }
     }
 }
