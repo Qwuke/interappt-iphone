@@ -26,6 +26,12 @@
 		4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C93C59019BD5C380049A0C5 /* InterAPPt.xcdatamodeld */; };
 		4C9D5D5D19D991780021D133 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D5D5C19D991780021D133 /* Location.swift */; };
 		4C9D5D6019DA3DB20021D133 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D5D5F19DA3DB20021D133 /* ImageCache.swift */; };
+		4C9D5D6A19DAD61F0021D133 /* LocationsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D5D6919DAD61F0021D133 /* LocationsListController.swift */; };
+		4C9D5D6D19DE4D240021D133 /* LocationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D5D6C19DE4D240021D133 /* LocationTableCell.swift */; };
+		4CC8E1C719E233A100C307DC /* LoginButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8E1C619E233A100C307DC /* LoginButtonView.swift */; };
+		4CC8E1CA19E235C300C307DC /* LoginAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8E1C919E235C300C307DC /* LoginAnimations.swift */; };
+		4CC8E1CC19E23A0F00C307DC /* FacebookLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8E1CB19E23A0F00C307DC /* FacebookLoginButton.swift */; };
+		4CC8E1CF19E2481400C307DC /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8E1CE19E2481400C307DC /* LoginViewBuilder.swift */; };
 		4CDDCBAB19C4B82900709663 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAA19C4B82900709663 /* logo.png */; };
 		4CDDCBAE19C4BC6600709663 /* Mohave.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAC19C4BB7400709663 /* Mohave.otf */; };
 		4CDDCBAF19C4BC6900709663 /* Mohave-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDDCBAD19C4BB7E00709663 /* Mohave-Bold.otf */; };
@@ -70,6 +76,12 @@
 		4C93C59119BD5C380049A0C5 /* InterAPPt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterAPPt.xcdatamodel; sourceTree = "<group>"; };
 		4C9D5D5C19D991780021D133 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4C9D5D5F19DA3DB20021D133 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		4C9D5D6919DAD61F0021D133 /* LocationsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsListController.swift; sourceTree = "<group>"; };
+		4C9D5D6C19DE4D240021D133 /* LocationTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableCell.swift; sourceTree = "<group>"; };
+		4CC8E1C619E233A100C307DC /* LoginButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButtonView.swift; sourceTree = "<group>"; };
+		4CC8E1C919E235C300C307DC /* LoginAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAnimations.swift; sourceTree = "<group>"; };
+		4CC8E1CB19E23A0F00C307DC /* FacebookLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginButton.swift; sourceTree = "<group>"; };
+		4CC8E1CE19E2481400C307DC /* LoginViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
 		4CDDCBAA19C4B82900709663 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4CDDCBAC19C4BB7400709663 /* Mohave.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mohave.otf; sourceTree = "<group>"; };
 		4CDDCBAD19C4BB7E00709663 /* Mohave-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mohave-Bold.otf"; sourceTree = "<group>"; };
@@ -116,6 +128,9 @@
 		4C7A688419B3AF270031ABFA /* InterAPPt */ = {
 			isa = PBXGroup;
 			children = (
+				4CC8E1CD19E247FB00C307DC /* InterfaceBuilders */,
+				4CC8E1C819E2359400C307DC /* Animations */,
+				4C9D5D6B19DE4D0D0021D133 /* Interface */,
 				4C9D5D5E19DA3D9C0021D133 /* Services */,
 				4C90444B19CF783100689264 /* Transitions */,
 				4C90444819CF6DDF00689264 /* Controllers */,
@@ -200,6 +215,7 @@
 				4C90444619CF6CCE00689264 /* MainController.swift */,
 				4C90444919CF718B00689264 /* ContainerController.swift */,
 				4C738B3119D255FC00C1D8DA /* LocationSearchController.swift */,
+				4C9D5D6919DAD61F0021D133 /* LocationsListController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -218,6 +234,32 @@
 				4C9D5D5F19DA3DB20021D133 /* ImageCache.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		4C9D5D6B19DE4D0D0021D133 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4C9D5D6C19DE4D240021D133 /* LocationTableCell.swift */,
+				4CC8E1C619E233A100C307DC /* LoginButtonView.swift */,
+				4CC8E1CB19E23A0F00C307DC /* FacebookLoginButton.swift */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		4CC8E1C819E2359400C307DC /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				4CC8E1C919E235C300C307DC /* LoginAnimations.swift */,
+			);
+			name = Animations;
+			sourceTree = "<group>";
+		};
+		4CC8E1CD19E247FB00C307DC /* InterfaceBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				4CC8E1CE19E2481400C307DC /* LoginViewBuilder.swift */,
+			);
+			name = InterfaceBuilders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,9 +367,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CC8E1C719E233A100C307DC /* LoginButtonView.swift in Sources */,
 				4C90444719CF6CCE00689264 /* MainController.swift in Sources */,
 				4C9D5D6019DA3DB20021D133 /* ImageCache.swift in Sources */,
+				4CC8E1CA19E235C300C307DC /* LoginAnimations.swift in Sources */,
+				4C9D5D6D19DE4D240021D133 /* LocationTableCell.swift in Sources */,
+				4CC8E1CF19E2481400C307DC /* LoginViewBuilder.swift in Sources */,
 				4C90444219C7E57C00689264 /* FBShimmeringLayer.m in Sources */,
+				4C9D5D6A19DAD61F0021D133 /* LocationsListController.swift in Sources */,
 				4C93C59219BD5C380049A0C5 /* InterAPPt.xcdatamodeld in Sources */,
 				4C8D4A2419BCBF1B0032E080 /* User.swift in Sources */,
 				4C90444319C7E57C00689264 /* FBShimmeringView.m in Sources */,
@@ -338,6 +385,7 @@
 				4C90444D19CF784D00689264 /* LoginToMainControllerTransition.swift in Sources */,
 				4C9D5D5D19D991780021D133 /* Location.swift in Sources */,
 				4C90444A19CF718B00689264 /* ContainerController.swift in Sources */,
+				4CC8E1CC19E23A0F00C307DC /* FacebookLoginButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

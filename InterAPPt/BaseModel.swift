@@ -68,6 +68,7 @@ class BaseModel: NSManagedObject {
         var queue: NSOperationQueue = NSOperationQueue()
         // Sending Asynchronous request using NSURLConnection
         NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+            
             completion(response: response, responseData: responseData, error: error)
         })
     }
@@ -79,15 +80,22 @@ class BaseModel: NSManagedObject {
             
             let jsonResult: Array = NSJSONSerialization.JSONObjectWithData(responseData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
             
-            var instances: [BaseModel] = []
-            for attributes in jsonResult {
-                let modelAttributes = attributes as? Dictionary<String, AnyObject>
-                var instance = self.build(modelAttributes!)
-                instances.append(instance)
-            }
             
-            completion(instances)
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                completion(self.parseJSONArray(jsonResult))
+            }
         })
+    }
+    
+    class func parseJSONArray(jsonArray: NSArray) -> [BaseModel] {
+        var instances: [BaseModel] = []
+        for attributes in jsonArray {
+            let modelAttributes = attributes as? Dictionary<String, AnyObject>
+            var instance = self.build(modelAttributes!)
+            instances.append(instance)
+        }
+        
+        return instances
     }
     
     class func build(attributes: Dictionary<String, AnyObject?>) -> BaseModel {
@@ -132,7 +140,7 @@ class BaseModel: NSManagedObject {
     
     func saveToApi(completion: (BaseModel) -> ()) {
         let requestBodyData = (self.toDataString() as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        var request = self.classForCoder.createRequest("POST", url: self.classForCoder.getURL(self.valueForKey("id") as String))
+        var request = self.classForCoder.createRequest("POST", url: self.classForCoder.getURL())
         request.HTTPBody = requestBodyData
         NSURLProtocol.setProperty(requestBodyData?.length, forKey: "Content-Length", inRequest: request)
         
@@ -143,7 +151,6 @@ class BaseModel: NSManagedObject {
             
             for (name, value) in jsonResult {
                 if self.respondsToSelector(Selector(name as String)) {
-                    println("\(name): \(value)")
                     self.setValue(value, forKeyPath: name as String)
                 }
             }

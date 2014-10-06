@@ -9,47 +9,53 @@
 import Foundation
 
 // Cache to store images in memory
-var imageCache: NSCache = NSCache()
+var imageCache: NSCache? = NSCache()
 
 class ImageCache {
     
-    class func getImagePath(name: String) -> String? {
+    class func getImageFolder() -> String? {
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
         if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
             if paths.count > 0 {
                 if let dirPath = paths[0] as? String {
-                    return dirPath.stringByAppendingPathComponent("\(name)")
+                    return dirPath
                 }
             }
         }
         return nil
     }
     
-    class func exists(url: NSURL) -> Bool {
-        var checkValidation = NSFileManager.defaultManager()
+    class func getImagePath(name: String) -> String? {
+        return self.getImageFolder()!.stringByAppendingPathComponent("\(name)")
+    }
     
-        return checkValidation.fileExistsAtPath(getImagePath(url.absoluteString!)!)
+    class func exists(filepath: String) -> Bool {
+        var checkValidation = NSFileManager.defaultManager()
+        return checkValidation.fileExistsAtPath(filepath)
     }
     
     class func get(url: NSURL) -> UIImage {
-        let urlString = url.absoluteString!.componentsSeparatedByString("/").last?.componentsSeparatedByString("?").first
+        var error: NSError? = nil
+        var fileMgr: NSFileManager = NSFileManager.defaultManager()
+        let documentsDirectory: String = self.getImageFolder()!
         
-        if let image: UIImage = imageCache.objectForKey(urlString!) as? UIImage {
-            println("Got from cache")
+        let filename = url.absoluteString!.componentsSeparatedByString("interappt").last?.componentsSeparatedByString("?").first?.componentsSeparatedByString("/").last
+        
+        if let image: UIImage = imageCache?.objectForKey(filename!) as? UIImage {
             return image
         } else {
-            if exists(url) {
-                println("Got from filesystem")
-                let image = UIImage(named: urlString)
-                imageCache.setObject(image, forKey: urlString!)
+            let filepath = self.getImagePath(filename!)
+            if exists(filepath!) {
+                let image = UIImage(named: filepath)
+                imageCache?.setObject(image, forKey: filename!)
                 return image
             } else {
-                println("Got from API")
                 let data: NSData = NSData(contentsOfURL: url)
-                let image = UIImage(data: data)
-                UIImageJPEGRepresentation(image, 0.9).writeToFile(self.getImagePath(urlString!)!, atomically: true)
-                imageCache.setObject(image, forKey: urlString!)
+                var image = UIImage(data: data)
+                
+                UIImageJPEGRepresentation(image, 1.0).writeToFile(filepath!, atomically: true)
+                imageCache?.setObject(image, forKey: filename!)
                 return image
             }
         }

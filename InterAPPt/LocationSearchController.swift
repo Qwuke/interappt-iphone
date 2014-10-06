@@ -11,11 +11,34 @@ import UIKit
 class LocationSearchController: UIViewController, UISearchBarDelegate {
     var currentUser: User!
     var searchField: UISearchBar!
+    var locationsTable: LocationsListController!
+    var loadingLocationsShimmer: FBShimmeringView!
     
     override func viewDidLoad() {
         self.currentUser = User.current()
         addNavigationBar()
         addSearchField()
+        addLocationsTable()
+        addLocationsShimmer()
+    }
+    
+    func addLocationsTable() {
+        self.locationsTable = LocationsListController(style: UITableViewStyle.Plain)
+        self.view.addSubview(self.locationsTable.view)
+        self.locationsTable.locations = []
+        self.locationsTable.tableView.hidden = true
+        self.locationsTable.tableView.frame = CGRectOffset(self.locationsTable.tableView.frame, 0, self.view.frame.size.height)
+    }
+    
+    func addLocationsShimmer() {
+        var loadingLabel = UILabel(frame: CGRectMake(0, 0, 200, 40))
+        loadingLabel.center = self.view.center
+        loadingLabel.text = "Searching For Locations…"
+        self.loadingLocationsShimmer = FBShimmeringView(frame: loadingLabel.frame)
+        self.loadingLocationsShimmer.contentView = loadingLabel
+        self.loadingLocationsShimmer.shimmering = true
+        self.loadingLocationsShimmer.alpha = 0.0
+        self.view.addSubview(self.loadingLocationsShimmer)
     }
     
     func addNavigationBar() {
@@ -49,10 +72,38 @@ class LocationSearchController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar!) {
-        Location.retrieveFromApi() { (locations) -> () in
-            for location in locations as [Location] {
-                println(location.logoImage())
+        
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+          self.loadingLocationsShimmer.alpha = 1.0
+          self.locationsTable.tableView.alpha = 0.0
+        })
+
+        Location.search(searchField.text) { (locations) -> () in
+            self.locationsTable.locations = locations as [Location]
+            self.locationsTable.tableView.reloadData()
+            
+            UIView.animateWithDuration(0.25, delay: 1.5, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                self.loadingLocationsShimmer.alpha = 0.0
+                self.locationsTable.tableView.alpha = 1.0
+                }, completion: { (complete) -> Void in
+            })
+            
+            if self.locationsTable.tableView.hidden {
+                self.locationsTable.tableView.hidden = false
+                
+                UIView.animateWithDuration(0.75, delay: 1.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                    
+                    self.locationsTable.tableView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height + 20 + self.searchField.frame.size.height, self.locationsTable.tableView.frame.size.width, self.locationsTable.tableView.frame.size.height)
+                    
+                    }, completion: { (complete) -> Void in
+                        
+                        self.locationsTable.tableView.tableHeaderView = self.searchField
+                        self.locationsTable.tableView.frame = CGRectOffset(self.locationsTable.tableView.frame, 0, self.searchField.frame.size.height * -1)
+                        
+                })
             }
         }
+
     }
 }
+

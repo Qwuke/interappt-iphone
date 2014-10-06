@@ -38,15 +38,19 @@ class User: BaseModel {
         }
     }
     
-    class func createFromFacebookInfo(fbUser: FBGraphUser, completion: (user: User) -> Void) {
+    class func createFromFacebookInfo(fbUser: [String : AnyObject], completion: (user: User) -> Void) {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
         let user = User(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
-        user.name = fbUser.name
-        user.facebook_id = fbUser.objectID
-        user.email = fbUser.objectForKey("email") as String
-        user.gender = fbUser.objectForKey("gender") as String
-        user.locale = fbUser.objectForKey("locale") as String
+        
+        user.name = fbUser["name"]! as String
+        user.facebook_id = fbUser["id"]! as String
+        user.email = fbUser["email"]! as String
+        user.gender = fbUser["gender"]! as String
+        user.locale = fbUser["locale"]! as String
+        
+        println("Saving \(user.name)")
+        
         user.save({(User) -> Void in
             managedObjectContext?.save(nil)
             user.saveProfileImage()
