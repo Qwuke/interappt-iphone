@@ -61,7 +61,14 @@ class LocationSearchController: UIViewController, UISearchBarDelegate {
         self.searchField.center = self.view.center
         self.searchField.placeholder = "Search Locations…"
         self.searchField.searchBarStyle = UISearchBarStyle.Minimal;
+        self.searchField.backgroundColor = UIColor.clearColor()
         self.searchField.delegate = self
+        
+        for view in self.searchField.subviews {
+            if view.isKindOfClass(UITextField) {
+
+            }
+        }
         self.view.addSubview(self.searchField)
     }
     

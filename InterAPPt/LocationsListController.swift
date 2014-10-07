@@ -14,6 +14,7 @@ class LocationsListController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerClass(LocationTableCell.classForCoder(), forCellReuseIdentifier: "LocationTableCell")
+        self.tableView.separatorInset = UIEdgeInsetsZero
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,6 +42,6 @@ class LocationsListController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return 75.0
+        return 70.0
     }
 }

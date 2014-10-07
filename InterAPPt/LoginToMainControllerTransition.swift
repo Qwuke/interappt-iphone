@@ -43,8 +43,8 @@ class LoginToMainControllerTransition: NSObject, UIViewControllerAnimatedTransit
         
         UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
             self.profileImage.frame = CGRectMake(16, 27, 30, 30)
-            self.interapptLabel.frame = CGRectOffset(self.interapptLabel.frame, 0, self.interapptLabel.frame.origin.y * -1 + 13.5)
-            self.interapptLabel.transform = CGAffineTransformScale(self.interapptLabel.transform, 0.668, 0.668);
+            self.interapptLabel.frame = CGRectOffset(self.interapptLabel.frame, 10.2, self.interapptLabel.frame.origin.y * -1 + 14.0)
+            self.interapptLabel.transform = CGAffineTransformScale(self.interapptLabel.transform, 0.500, 0.500);
             
             }) { (completion: Bool) -> Void in
                 

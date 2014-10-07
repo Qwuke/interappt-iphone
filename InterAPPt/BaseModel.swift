@@ -128,6 +128,7 @@ class BaseModel: NSManagedObject {
         var dataString = ""
         
         for (name, attribute) in entity.attributesByName  {
+            println(self.valueForKey(name as String), self.classForCoder.className())
             dataString += "\(self.classForCoder.className().lowercaseString)[\(name)]=\(self.valueForKey(name as String))&"
         }
         

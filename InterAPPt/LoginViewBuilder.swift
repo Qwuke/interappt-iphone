@@ -52,7 +52,7 @@ class LoginViewBuilder {
     
     func addWelcomeLabel() {
         loginController.welcomeLabel = UILabel()
-        loginController.welcomeLabel.frame = CGRectMake(25, view.center.y + 60, 150, 100)
+        loginController.welcomeLabel.frame = CGRectMake(25, height + 100, 150, 100)
         loginController.welcomeLabel.text = "Welcome"
         loginController.welcomeLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         loginController.welcomeLabel.numberOfLines = 0
@@ -91,7 +91,7 @@ class LoginViewBuilder {
     
     func addProfileImage() {
         loginController.profileImage = UIImageView(image: loginController.currentUser.profileImage())
-        loginController.profileImage.frame = CGRectMake(view.center.x - 40, view.frame.size.height - 200, 80, 80)
+        loginController.profileImage.frame = CGRectMake(25, height, 80, 80)
         loginController.profileImage.alpha = 0.0
         loginController.profileImage.clipsToBounds = true
         loginController.profileImage.layer.cornerRadius = 40

@@ -56,17 +56,21 @@ class LoginAnimations {
             }, completion: completion)
     }
     
-    func showSignedIn(completion: (complete: Bool) -> () = {(value: Bool) in}) {
+    func showSignedIn(visibleLogo: Bool, completion: (complete: Bool) -> () = {(value: Bool) in}) {
         let lController = loginController
+        let frame = lController.interAPPtLabel.frame;
+        
+        if visibleLogo {
+            lController.interAPPtLabel.frame = CGRectMake(view.frame.width, 60, frame.width, frame.height)
+        }
         
         lController.signingInShimmer.shimmering = false
         UIView.animateWithDuration(0.8, animations: {
             lController.interAPPtLabel.alpha = 1.0
-            let frame = lController.interAPPtLabel.frame;
-            lController.interAPPtLabel.frame = CGRectMake(frame.origin.x, 60, frame.size.width, frame.size.height)
+            lController.interAPPtLabel.frame = CGRectMake(25, 60, frame.size.width, frame.size.height)
             
             lController.profileImage.alpha = 1.0
-            lController.profileImage.frame = CGRectMake(self.view.center.x - 40, self.view.center.y - 40, 80, 80)
+            lController.profileImage.frame = CGRectMake(25, self.view.center.y - 40, 80, 80)
             
             lController.signingInLabel.alpha = 0
             
@@ -78,7 +82,7 @@ class LoginAnimations {
             
             lController.welcomeLabel.alpha = 1.0
             let frame = lController.welcomeLabel.frame
-            lController.welcomeLabel.frame = CGRectMake(self.view.center.x - (frame.size.width / 2), frame.origin.y, frame.size.width, frame.size.height)
+            lController.welcomeLabel.frame = CGRectMake(25, self.view.center.y + 100, frame.size.width, frame.size.height)
             }, completion: completion)
     }
 }

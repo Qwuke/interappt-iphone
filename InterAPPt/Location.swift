@@ -16,11 +16,14 @@ class Location: BaseModel {
     @NSManaged var company: String
     var logoURL: String!
     var thumbnailURL: String!
+    var backgroundURL: String!
     
     override class func build(attributes: Dictionary<String, AnyObject?>) -> Location {
         let instance = super.build(attributes) as Location
+        println(attributes)
         instance.logoURL = ((attributes["logo"] as NSDictionary)["logo"] as NSDictionary)["url"] as String
-        instance.thumbnailURL = (((attributes["logo"] as NSDictionary)["logo"] as NSDictionary)["thumb"] as NSDictionary)["url"] as String
+        instance.thumbnailURL = (((attributes["background"] as NSDictionary)["background"] as NSDictionary)["thumb"] as NSDictionary)["url"] as String
+        instance.backgroundURL = ((attributes["background"] as NSDictionary)["background"] as NSDictionary)["url"] as String
         
         return instance
     }
@@ -49,5 +52,9 @@ class Location: BaseModel {
     
     func thumbnailImage() -> UIImage {
         return ImageCache.get(NSURL(string: self.thumbnailURL))
+    }
+    
+    func backgroundImage() -> UIImage {
+        return ImageCache.get(NSURL(string: self.backgroundURL))
     }
 }

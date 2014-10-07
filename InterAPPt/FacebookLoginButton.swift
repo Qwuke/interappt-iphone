@@ -23,9 +23,13 @@ class FacebookLoginButton : LoginButton {
     func loginToFacebook() {
         println("Login to Facebook")
         FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_friends"], allowLoginUI: true, completionHandler: {session, state, error in
+            
             println("completion handler: session \(session), state \(state), error \(error)")
-            self.delegate.userDidBeginLogin()
-            self.fetchMeInfo()
+            
+            if state == FBSessionState.Open {
+                self.delegate.userDidBeginLogin()
+                self.fetchMeInfo()
+            }
         })
     }
     

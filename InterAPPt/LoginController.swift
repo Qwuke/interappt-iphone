@@ -33,18 +33,18 @@ class LoginController: UIViewController, LoginButtonDelegate {
         
         addLogoutGestures()
 
+        
+//        self.currentUser = User.current()
+//        self.currentUser.destroy({ () -> () in
+//            FBSession.activeSession().closeAndClearTokenInformation()
+//        })
+        
         self.currentUser = User.current()
         
-//        if self.currentUser == nil {
-//            loginAnimations.showLoginViews()
-//        } else {
-//            showLoggedInView()
-//        }
-        
-        loginAnimations.showLoginViews(duration: 1.0) { (complete) -> () in
-            self.loginAnimations.showSigningIn(completion: { (complete) -> () in
-                self.showLoggedInView()
-            })
+        if self.currentUser == nil {
+            loginAnimations.showLoginViews()
+        } else {
+            showLoggedInView(true)
         }
     }
     
@@ -54,12 +54,12 @@ class LoginController: UIViewController, LoginButtonDelegate {
     
     func userDidLogin(user: User) {
         self.currentUser = user
-        showLoggedInView()
+        showLoggedInView(false)
     }
     
-    func showLoggedInView() {
+    func showLoggedInView(fromSignIn: Bool) {
         loginInterface.addProfileImage()
-        loginAnimations.showSignedIn() { (complete: Bool) in
+        loginAnimations.showSignedIn(fromSignIn) { (complete: Bool) in
             (self.parentViewController as ContainerController).showMainController()
         }
     }

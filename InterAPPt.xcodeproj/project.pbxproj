@@ -128,8 +128,7 @@
 		4C7A688419B3AF270031ABFA /* InterAPPt */ = {
 			isa = PBXGroup;
 			children = (
-				4CC8E1CD19E247FB00C307DC /* InterfaceBuilders */,
-				4CC8E1C819E2359400C307DC /* Animations */,
+				4CF9DCE419E370DF0001A40D /* Login */,
 				4C9D5D6B19DE4D0D0021D133 /* Interface */,
 				4C9D5D5E19DA3D9C0021D133 /* Services */,
 				4C90444B19CF783100689264 /* Transitions */,
@@ -211,7 +210,6 @@
 		4C90444819CF6DDF00689264 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4C7A688C19B3AF270031ABFA /* LoginController.swift */,
 				4C90444619CF6CCE00689264 /* MainController.swift */,
 				4C90444919CF718B00689264 /* ContainerController.swift */,
 				4C738B3119D255FC00C1D8DA /* LocationSearchController.swift */,
@@ -246,20 +244,14 @@
 			name = Interface;
 			sourceTree = "<group>";
 		};
-		4CC8E1C819E2359400C307DC /* Animations */ = {
+		4CF9DCE419E370DF0001A40D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				4C7A688C19B3AF270031ABFA /* LoginController.swift */,
 				4CC8E1C919E235C300C307DC /* LoginAnimations.swift */,
-			);
-			name = Animations;
-			sourceTree = "<group>";
-		};
-		4CC8E1CD19E247FB00C307DC /* InterfaceBuilders */ = {
-			isa = PBXGroup;
-			children = (
 				4CC8E1CE19E2481400C307DC /* LoginViewBuilder.swift */,
 			);
-			name = InterfaceBuilders;
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

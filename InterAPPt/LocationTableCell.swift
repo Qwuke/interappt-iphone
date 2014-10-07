@@ -16,20 +16,17 @@ class LocationTableCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
 
-        self.nameLabel = UILabel(frame: CGRectMake(73, 20, 204, 21))
+        self.nameLabel = UILabel(frame: CGRectMake(120, 12, 204, 21))
         self.nameLabel.font = UIFont.boldSystemFontOfSize(17.0)
         self.nameLabel.backgroundColor = UIColor.whiteColor()
         
-        self.companyLabel = UILabel(frame: CGRectMake(73, 40, 204, 21))
+        self.companyLabel = UILabel(frame: CGRectMake(120, 35, 204, 21))
         self.companyLabel.font = UIFont.systemFontOfSize(14.0)
         self.companyLabel.textColor = UIColor.darkTextColor()
         self.companyLabel.backgroundColor = UIColor.whiteColor()
         
         self.locationImageView = UIImageView()
-        self.locationImageView.frame = CGRectMake(5, 7, 60, 60)
-        self.locationImageView.layer.borderColor = UIColor.blackColor().CGColor
-        self.locationImageView.layer.borderWidth = 1
-        self.locationImageView.layer.cornerRadius = 30
+        self.locationImageView.frame = CGRectMake(0, 0, 100, 70)
         self.locationImageView.clipsToBounds = true
         
         super.init(style: UITableViewCellStyle.Value1, reuseIdentifier: reuseIdentifier)
@@ -38,7 +35,8 @@ class LocationTableCell: UITableViewCell {
         self.addSubview(self.companyLabel)
         self.addSubview(self.locationImageView)
         
-        self.separatorInset = UIEdgeInsetsMake(0, 75, 0, 0)
+        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsetsZero
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -50,6 +48,6 @@ class LocationTableCell: UITableViewCell {
         
         self.nameLabel.text = location.name
         self.companyLabel.text = location.company
-        self.locationImageView.image = location.logoImage()
+        self.locationImageView.image = location.thumbnailImage()
     }
 }
