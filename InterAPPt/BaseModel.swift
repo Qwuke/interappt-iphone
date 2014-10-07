@@ -12,86 +12,46 @@ import Foundation
 import CoreData
 
 class BaseModel: NSManagedObject {
-    var mContext: NSManagedObjectContext!
     
-    func managedObjectContext() -> NSManagedObjectContext {
-        if (mContext == nil) {
-            mContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
-        }
-        return mContext
+    required override init(entity: NSEntityDescription,
+        insertIntoManagedObjectContext context: NSManagedObjectContext!) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
-    
-    func save(completion: (BaseModel) -> ()) {
-        saveToApi(completion)
-    }
-    
-    func destroy(completion: () -> ()) {
-        deleteFromApi({ (BaseModel) -> () in
-            self.managedObjectContext().deleteObject(self)
-            self.managedObjectContext().save(nil)
-            completion()
-        })
-    }
-    
-    func toDataString() -> String {
-        var dataString = ""
-        
-        for (name, attribute) in entity.attributesByName  {
-            dataString += "\(self.classForCoder.className().lowercaseString)[\(name)]=\(self.valueForKey(name as String))&"
-        }
-        
-        let stringLength = countElements(dataString)
-        let substringIndex = stringLength - 1
-        dataString.substringToIndex(advance(dataString.startIndex, substringIndex))
 
-        return dataString
+    class func managedObjectContext() -> NSManagedObjectContext {
+      return (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
     }
     
-    func getAccessToken() -> String {
+    class func className() -> String {
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        let bundleName = dict.objectForKey("CFBundleName") as String
+        let _className = NSStringFromClass(self)
+        return _className.componentsSeparatedByString("\(bundleName).")[1] as String
+    }
+    
+    class func getAccessToken() -> String {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
         return dict.objectForKey("InterAPPt Access Token") as String
     }
     
-    func getURL() -> NSURL {
+    class func getURL() -> NSURL {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
         let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
-        return NSURL(string: urlAsString + "/\(self.classForCoder.className().lowercaseString)s")
+        return NSURL(string: urlAsString + "/\(self.className().lowercaseString)s")
     }
     
-    func getURL(baseModelId: String) -> NSURL {
+    class func getURL(baseModelId: String) -> NSURL {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
         let urlAsString = dict.objectForKey("DevelopmentApiUrl") as String
-        return NSURL(string: urlAsString + "/\(self.classForCoder.className().lowercaseString)s/\(baseModelId)")
+        return NSURL(string: urlAsString + "/\(self.className().lowercaseString)s/\(baseModelId)")
     }
     
-    func saveToApi(completion: (BaseModel) -> ()) {
-        let requestBodyData = (self.toDataString() as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        var request = createRequest("POST")
-        request.HTTPBody = requestBodyData
-        NSURLProtocol.setProperty(requestBodyData?.length, forKey: "Content-Length", inRequest: request)
-        
-        // Sending Asynchronous request using NSURLConnection
-        sendRequest(request, completion:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
-            
-            let jsonResult: Dictionary = NSJSONSerialization.JSONObjectWithData(responseData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-            
-            for (name, value) in jsonResult {
-                if self.respondsToSelector(Selector(name as String)) {
-                    println("\(name): \(value)")
-                    self.setValue(value, forKeyPath: name as String)
-                }
-            }
-            
-            completion(self)
-        })
-    }
-    
-    func createRequest(method: String) -> NSMutableURLRequest {
+    class func createRequest(method: String, url: NSURL) -> NSMutableURLRequest {
         let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        var url = self.valueForKey("id") == nil ? self.getURL() : self.getURL(self.valueForKey("id") as String)
         println("URL: \(url)")
         
         let request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: 2.0)
@@ -102,21 +62,109 @@ class BaseModel: NSManagedObject {
         return request
     }
     
-    func sendRequest(request: NSURLRequest, completion: (response:NSURLResponse!, responseData:NSData!, error:NSError!) -> ()) {
+    class func sendRequest(request: NSURLRequest, completion: (response:NSURLResponse!, responseData:NSData!, error:NSError!) -> ()) {
         var error: NSError? = nil
         var response: NSURLResponse? = nil
         var queue: NSOperationQueue = NSOperationQueue()
         // Sending Asynchronous request using NSURLConnection
         NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+            
             completion(response: response, responseData: responseData, error: error)
         })
     }
     
-    func deleteFromApi(completion: (BaseModel) -> ()) {
-        let request = createRequest("DELETE")
+    class func retrieveFromApi(completion: (NSArray) -> ()) {
+        var request = createRequest("GET", url: self.getURL())
+        
+        sendRequest(request, completion:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+            
+            let jsonResult: Array = NSJSONSerialization.JSONObjectWithData(responseData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSArray
+            
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                completion(self.parseJSONArray(jsonResult))
+            }
+        })
+    }
+    
+    class func parseJSONArray(jsonArray: NSArray) -> [BaseModel] {
+        var instances: [BaseModel] = []
+        for attributes in jsonArray {
+            let modelAttributes = attributes as? Dictionary<String, AnyObject>
+            var instance = self.build(modelAttributes!)
+            instances.append(instance)
+        }
+        
+        return instances
+    }
+    
+    class func build(attributes: Dictionary<String, AnyObject?>) -> BaseModel {
+        let managedObjectContext = self.managedObjectContext()
+        let entity = NSEntityDescription.entityForName(self.className(), inManagedObjectContext: managedObjectContext)
+        let instance = self(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+        
+        for (name, value) in attributes {
+            if instance.respondsToSelector(Selector(name as String)) {
+                instance.setValue(value, forKeyPath: name as String)
+            }
+        }
+        
+        return instance
+    }
+    
+    func save(completion: (BaseModel) -> ()) {
+        saveToApi(completion)
+    }
+    
+    func destroy(completion: () -> ()) {
+        deleteFromApi({ (BaseModel) -> () in
+            self.classForCoder.managedObjectContext().deleteObject(self)
+            self.classForCoder.managedObjectContext().save(nil)
+            completion()
+        })
+    }
+    
+    func toDataString() -> String {
+        var dataString = ""
+        
+        for (name, attribute) in entity.attributesByName  {
+            println(self.valueForKey(name as String), self.classForCoder.className())
+            dataString += "\(self.classForCoder.className().lowercaseString)[\(name)]=\(self.valueForKey(name as String))&"
+        }
+        
+        let stringLength = countElements(dataString)
+        let substringIndex = stringLength - 1
+        dataString.substringToIndex(advance(dataString.startIndex, substringIndex))
+        
+        return dataString
+    }
+    
+    func saveToApi(completion: (BaseModel) -> ()) {
+        let requestBodyData = (self.toDataString() as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+        var request = self.classForCoder.createRequest("POST", url: self.classForCoder.getURL())
+        request.HTTPBody = requestBodyData
+        NSURLProtocol.setProperty(requestBodyData?.length, forKey: "Content-Length", inRequest: request)
         
         // Sending Asynchronous request using NSURLConnection
-        sendRequest(request, completion: {(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+        self.classForCoder.sendRequest(request, completion:{(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
+            
+            let jsonResult: Dictionary = NSJSONSerialization.JSONObjectWithData(responseData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+            
+            for (name, value) in jsonResult {
+                if self.respondsToSelector(Selector(name as String)) {
+                    self.setValue(value, forKeyPath: name as String)
+                }
+            }
+            
+            completion(self)
+        })
+    }
+    
+    func deleteFromApi(completion: (BaseModel) -> ()) {
+        let request = self.classForCoder.createRequest("DELETE", url: self.classForCoder.getURL(self.valueForKey("id") as String))
+        
+        // Sending Asynchronous request using NSURLConnection
+        self.classForCoder.sendRequest(request, completion: {(response:NSURLResponse!, responseData:NSData!, error: NSError!) -> Void in
             completion(self)
         })
     }
@@ -131,13 +179,4 @@ class BaseModel: NSManagedObject {
         
         return dict
     }
-    
-    class func className() -> String {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        let bundleName = dict.objectForKey("CFBundleName") as String
-        let _className = NSStringFromClass(self)
-        return _className.componentsSeparatedByString("\(bundleName).")[1] as String
-    }
-    
 }
