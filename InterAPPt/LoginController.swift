@@ -32,12 +32,6 @@ class LoginController: UIViewController, LoginButtonDelegate {
         loginAnimations = LoginAnimations(loginController: self)
         
         addLogoutGestures()
-
-        
-//        self.currentUser = User.current()
-//        self.currentUser.destroy({ () -> () in
-//            FBSession.activeSession().closeAndClearTokenInformation()
-//        })
         
         self.currentUser = User.current()
         

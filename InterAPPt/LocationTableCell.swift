@@ -34,9 +34,6 @@ class LocationTableCell: UITableViewCell {
         self.addSubview(self.nameLabel)
         self.addSubview(self.companyLabel)
         self.addSubview(self.locationImageView)
-        
-        self.layoutMargins = UIEdgeInsetsZero
-        self.separatorInset = UIEdgeInsetsZero
     }
 
     required init(coder aDecoder: NSCoder) {
